@@ -1,5 +1,7 @@
 # How to Start Docker Postgres Container
 
+# This folder is deprecated
+
 ## Setup
 ```
 pip install docker
