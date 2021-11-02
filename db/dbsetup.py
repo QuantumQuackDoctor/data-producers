@@ -1,4 +1,4 @@
-import psycopg2, time
+import psycopg2
 from config import *
 
 log = logging.getLogger(__name__)
@@ -7,6 +7,7 @@ db_config = config()
 def create_schema():
     '''runs dbschema.sql to create all tables'''
     conn = None
+    log.info('Connecting to database...')
     try:
         conn = psycopg2.connect(**db_config)
         if conn != None:
@@ -37,5 +38,3 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
     create_schema()
-    # tearDown()
-
