@@ -40,9 +40,14 @@ Resources:
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref DataProducerInstanceSecurityGroup
-      SubnetId: !Sub "{{resolve:secretsmanager:PublicSubnet1-${Environment}}}"
+      SubnetId: !Sub "{{resolve:secretsmanager:PublicSubnet2-${Environment}}}"
       Tags:
-        - Key: name
+        - Key: Name
           Value: DataProducerInstance
       UserData: 
         !Ref UserData
+
+Outputs:
+  DataProducerPublicIp:
+    Description: EC2 Instance Public Ip
+    Value: !GetAtt DataProducerEC2Instance.PublicIp
