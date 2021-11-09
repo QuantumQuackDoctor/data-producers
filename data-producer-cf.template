@@ -36,7 +36,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.small
-      ImageId: ami-0f19d220602031aed
+      ImageId: ami-01cc34ab2709337aa
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref DataProducerInstanceSecurityGroup
