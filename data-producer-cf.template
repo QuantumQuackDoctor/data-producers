@@ -42,10 +42,8 @@ Resources:
       - AssociatePublicIpAddress: "true"
         DeviceIndex: "0"
         GroupSet: 
-          - !Sub "{{resolve:secretsmanager:VpcId-${Environment}}}"
+          - Ref: DataProducerInstanceSecurityGroup
         SubnetId: !Sub "{{resolve:secretsmanager:PublicSubnet2-${Environment}}}"
-      SecurityGroupIds:
-        - !Ref DataProducerInstanceSecurityGroup
       Tags:
         - Key: Name
           Value: DataProducerInstance
