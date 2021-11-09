@@ -36,14 +36,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.small
-      ImageId: 
-        Fn::FindInMap:
-          - AWSRegionArch2AMI
-          - Ref: AWS::Region
-          - Fn::FindInMap:
-            - AWSInstanceType2Arch
-            - t2.small
-            - Arch
+      ImageId: ami-0f19d220602031aed
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref DataProducerInstanceSecurityGroup
