@@ -1,0 +1,58 @@
+DataProducerInstance:
+
+  Parameters:
+    Environment:
+      Type: String
+      Default: prod
+      AllowedValues:
+        - "prod"
+        - "dev"
+        - "test"
+    KeyName:
+      Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+      Type: AWS::EC2::KeyPair::KeyName
+    UserData:
+      Type: String
+
+  # Data Producers Security Group
+  DataProducerInstanceSecurityGroup:
+  Type: AWS::EC2::SecurityGroup
+  Properties:
+    GroupName: !Sub "DataProducerInstance-${Environment}"
+    GroupDescription: Enable all traffic
+    VpcId: !Sub "{{resolve:secretsmanager:VpcId-${Environment}}}"
+    SecurityGroupIngress:
+    - IpProtocol: -1
+      CidrIp: 0.0.0.0/0
+    Tags:
+      - Key: name
+        Value: DataProducerInstance
+
+  # EC2 instance for data producers
+  DataProducerEC2Instance:
+    Type: AWS::EC2::Instance
+
+    Properties:
+      InstanceType: t2.small
+      ImageId: 
+        Fn::FindInMap:
+          - AWSRegionArch2AMI
+          - Ref: AWS::Region
+          - Fn::FindInMap:
+            - AWSInstanceType2Arch
+            - t2.small
+            - Arch
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref DataProducerInstanceSecurityGroup
+      SubnetId: !Sub "{{resolve:secretsmanager:PublicSubnet1-${Environment}}}"
+      Tags:
+        - Key: name
+          Value: DataProducerInstance
+      UserData: 
+        !Ref UserData
+
+  Outputs:
+    DataProducerPublicIp:
+      Description: EC2 Instance Public Ip
+      Value: !GetAtt DataProducerEC2Instance.PublicIp
