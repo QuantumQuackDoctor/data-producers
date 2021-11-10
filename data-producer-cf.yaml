@@ -1,0 +1,85 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Data producer template
+Parameters:
+  Environment:
+    Type: String
+    Default: prod
+    AllowedValues:
+      - "prod"
+      - "dev"
+      - "test"
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+  UserData:
+    Type: String
+  
+Resources:
+  # Data Producers Security Group
+  DataProducerInstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub "DataProducerInstance-${Environment}"
+      GroupDescription: Enable all traffic
+      VpcId: !Sub "{{resolve:secretsmanager:VpcId-${Environment}}}"
+      SecurityGroupIngress:
+      - IpProtocol: -1
+        CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: DataProducerInstance
+
+  # EC2 instance for data producers
+  DataProducerEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.small
+      ImageId: ami-01cc34ab2709337aa
+      KeyName: !Ref KeyName
+      NetworkInterfaces: 
+      - AssociatePublicIpAddress: "true"
+        DeviceIndex: "0"
+        GroupSet: 
+          - Ref: DataProducerInstanceSecurityGroup
+        SubnetId: !Sub "{{resolve:secretsmanager:PublicSubnet2-${Environment}}}"
+      Tags:
+        - Key: Name
+          Value: DataProducerInstance
+      UserData:
+        !Base64 |
+        #!/bin/bash
+        yum -y update
+        yum -y install git 
+        python -m ensurepip --upgrade
+        cd /home/ec2-user
+        su ec2-user -c "git clone https://github.com/QuantumQuackDoctor/data-producers.git"
+        cd data-producers/ && pip3 install -r requirements.txt
+
+  ManagedInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - secretsmanager.amazonaws.com
+            - ec2.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/SecretsManagerReadWrite
+      Path: "/"
+
+  ManagedInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: "/"
+      Roles:
+      - !Ref ManagedInstanceRole
+      InstanceProfileName: ManagedInstanceProfile 
+
+Outputs:
+  DataProducerPublicIp:
+    Description: EC2 Instance Public Ip
+    Value: !GetAtt DataProducerEC2Instance.PublicIp
