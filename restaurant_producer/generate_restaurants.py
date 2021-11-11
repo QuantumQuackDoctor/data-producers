@@ -5,7 +5,7 @@ from mock_data import *
 from dao import *
 
 fake = Faker()
-global_config = config(section='h2')
+global_config = config(section='postgresql-prod')
 log = logging.getLogger(__name__)
 
 def generate_image():

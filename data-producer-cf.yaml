@@ -36,6 +36,7 @@ Resources:
       InstanceType: t2.small
       ImageId: ami-01cc34ab2709337aa
       KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref ManagedInstanceProfile
       NetworkInterfaces: 
       - AssociatePublicIpAddress: "true"
         DeviceIndex: "0"

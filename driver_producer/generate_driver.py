@@ -8,7 +8,7 @@ from mock_data import *
 
 fake = Faker()
 fake.add_provider(VehicleProvider)
-global_config = config(section='h2')
+global_config = config(section='postgresql-prod')
 log = logging.getLogger(__name__)
 
 # gets a random user id that's not a driver

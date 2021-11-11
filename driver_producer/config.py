@@ -65,4 +65,5 @@ def get_secret(secret_name):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.ERROR, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    print(config())
+    print(get_secret('DBPassword-prod'))
+    # print(config())

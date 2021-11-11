@@ -5,7 +5,7 @@ from dao import *
 from config import *
 
 fake = Faker()
-global_config = config(section='h2')
+global_config = config(section='postgresql-prod')
 
 def generatePassword(size=10, chars=string.ascii_letters + string.digits + string.punctuation):
 	return ''.join(random.choice(chars) for _ in range(size))
