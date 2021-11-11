@@ -1,6 +1,3 @@
-CREATE USER postgres SUPERUSER;
-CREATE DATABASE postgres WITH OWNER postgres;
-
 create sequence if not exists hibernate_sequence;
 
 alter sequence hibernate_sequence owner to postgres;
