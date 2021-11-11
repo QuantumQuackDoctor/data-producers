@@ -19,13 +19,11 @@ def config(filename=ROOT_DIR+'/database.ini', section='postgresql-prod'):
             if parser.has_section(section):
                 params = parser.items(section)
                 for param in params:
-                    db[param[0]] = param[1]
+                    db[param[0]] = get_secret(param[1])
             else:
                 raise Exception('Section {0} not found in the {1} file'.format(section, filename))
     except FileNotFoundError as e:
         log.error(e)
-    
-    db.update(password=get_secret(db.get('password')))
 
     return db
 
@@ -37,7 +35,7 @@ client = session.client(
 
 def get_secret(secret_name):
 
-    text_secret_data = ''
+    text_secret_data = secret_name
 
     try:
         get_secret_value_response = client.get_secret_value(SecretId=secret_name)
