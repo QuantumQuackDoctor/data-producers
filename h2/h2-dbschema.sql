@@ -172,6 +172,8 @@ create table if not exists user_entity
     email_option                boolean,
     phone_option                boolean,
     dark                        boolean,
+    email_order                 boolean,
+    email_delivery              boolean,
     user_role_id                bigint
         constraint fkovfl3qs88u908k064nsrxhq5a
             references user_role_entity
