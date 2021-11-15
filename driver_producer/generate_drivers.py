@@ -70,12 +70,12 @@ def add_driver_rating():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(200):
+    for i in range(20):
         try:
             add_driver_to_db()
         except Exception:
             log.warn('skipping %s', str(i))
-    for i in range(300):
+    for i in range(30):
         try:
             add_driver_rating()
         except Exception:

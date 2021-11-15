@@ -126,7 +126,7 @@ def add_order_to_db():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(500):
+    for i in range(50):
         try:
             add_order_to_db()
         except Exception:
