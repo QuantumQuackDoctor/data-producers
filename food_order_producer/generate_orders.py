@@ -45,16 +45,11 @@ def generate_order():
     delivery_slot = fake.date_time_between_dates(datetime_start=restaurant_complete, datetime_end=restaurant_complete+timedelta(minutes=40)) if delivery else None
     driver_complete = fake.date_time_between_dates(datetime_start=restaurant_complete, datetime_end=restaurant_complete+timedelta(minutes=40)) if delivery else None
     tip = round(random.uniform(0,50), 2) if delivery else None
-    order_complete = ''
-    try:
-        order_complete = fake.date_time_between_dates(datetime_start=driver_complete, datetime_end=driver_complete+timedelta(minutes=50)) if delivery else None
-    except Exception:
-        order_complete = driver_complete if delivery else None
+    order_complete = fake.date_time_between_dates(datetime_start=driver_complete, datetime_end=driver_complete+timedelta(minutes=50)) if delivery else None
     refunded = random.choice([True, False]) if payment_confirmed else False
     restaurant_note = fake.paragraph()
     user_id = ids[1]
     confirmation_code = fake.bothify('########') if payment_confirmed else None
-    print(order_complete)
 
     order = Order(id, active, address, delivery, driver_note, delivery_slot, driver_accept, driver_complete, order_complete,
                  placed, restaurant_accept, restaurant_complete, restaurant_start, delivery_price, food_price,
