@@ -14,6 +14,7 @@ def get_ids():
     driver_data = prepare_statement(CrudOperation.READ, 'driver_entity', config=global_config)
     user_id = ''
     driver_id = ''
+    print('here get_ids')
     if user_data and driver_data:
         user_ids = [user[0] for user in user_data]
         driver_ids = [driver[1] for driver in driver_data]
@@ -26,7 +27,6 @@ def get_ids():
     return (driver_id, user_id)
 
 def generate_order():
-    print('here')
     id = int(fake.numerify(text='###########'))
     active = random.choice([True, False])
     geolocation = fake.local_latlng(country_code='US')
@@ -127,7 +127,7 @@ def add_order_to_db():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(50):
+    for i in range(5):
         try:
             add_order_to_db()
         except Exception:
