@@ -14,10 +14,13 @@ def get_ids():
     driver_data = prepare_statement(CrudOperation.READ, 'driver_entity', config=global_config)
     user_id = ''
     driver_id = ''
-    print('here get_ids')
+    print(user_data)
+    print('----------------------')
+    print(driver_data)
     if user_data and driver_data:
         user_ids = [user[0] for user in user_data]
         driver_ids = [driver[1] for driver in driver_data]
+
         user_id = random.choice(user_ids)
         driver_id = random.choice(driver_ids)
     else:
