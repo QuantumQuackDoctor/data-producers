@@ -26,6 +26,7 @@ def get_ids():
     return (driver_id, user_id)
 
 def generate_order():
+    print('here')
     id = int(fake.numerify(text='###########'))
     active = random.choice([True, False])
     geolocation = fake.local_latlng(country_code='US')
@@ -54,10 +55,10 @@ def generate_order():
     restaurant_note = fake.paragraph()
     user_id = ids[1]
     confirmation_code = fake.bothify('########') if payment_confirmed else None
-
     order = Order(id, active, address, delivery, driver_note, delivery_slot, driver_accept, driver_complete, order_complete,
                  placed, restaurant_accept, restaurant_complete, restaurant_start, delivery_price, food_price,
                  tip, refunded, restaurant_note, driver_user_id, user_id, confirmation_code, payment_confirmed)
+    print(**order.toDict())
     log.info('order: %s', **order.toDict())
 
     return order
@@ -100,7 +101,6 @@ def add_order_to_db():
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
-    print('here')
     log.info('Adding %s to order_entity table', **order.toDict())
     prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
 
