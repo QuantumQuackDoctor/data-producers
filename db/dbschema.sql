@@ -1,6 +1,6 @@
 create sequence if not exists hibernate_sequence;
 
-alter sequence hibernate_sequence owner to postgres;
+alter sequence hibernate_sequence owner to rds_superuser;
 
 create table if not exists user_entity_orders
 (
@@ -11,7 +11,7 @@ create table if not exists user_entity_orders
 );
 
 alter table user_entity_orders
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists configuration_entity
 (
@@ -22,7 +22,7 @@ create table if not exists configuration_entity
 );
 
 alter table configuration_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists food_order_entity
 (
@@ -33,7 +33,7 @@ create table if not exists food_order_entity
 );
 
 alter table food_order_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists image_entity
 (
@@ -44,7 +44,7 @@ create table if not exists image_entity
 );
 
 alter table image_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists menu_item_entity
 (
@@ -59,7 +59,7 @@ create table if not exists menu_item_entity
 );
 
 alter table menu_item_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists food_order_entity_order_items
 (
@@ -72,7 +72,7 @@ create table if not exists food_order_entity_order_items
 );
 
 alter table food_order_entity_order_items
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists menu_item_entity_configurations
 (
@@ -87,7 +87,7 @@ create table if not exists menu_item_entity_configurations
 );
 
 alter table menu_item_entity_configurations
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists order_configuration_entity
 (
@@ -98,7 +98,7 @@ create table if not exists order_configuration_entity
 );
 
 alter table order_configuration_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists food_order_entity_configurations
 (
@@ -113,7 +113,7 @@ create table if not exists food_order_entity_configurations
 );
 
 alter table food_order_entity_configurations
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists promotions_entity
 (
@@ -126,7 +126,7 @@ create table if not exists promotions_entity
 );
 
 alter table promotions_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists restaurant_entity
 (
@@ -153,7 +153,7 @@ create table if not exists restaurant_entity
 );
 
 alter table restaurant_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists restaurant_entity_menu
 (
@@ -168,7 +168,7 @@ create table if not exists restaurant_entity_menu
 );
 
 alter table restaurant_entity_menu
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists restaurant_entity_promotions
 (
@@ -183,7 +183,7 @@ create table if not exists restaurant_entity_promotions
 );
 
 alter table restaurant_entity_promotions
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists user_role_entity
 (
@@ -196,7 +196,7 @@ create table if not exists user_role_entity
 );
 
 alter table user_role_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists user_entity
 (
@@ -225,7 +225,7 @@ create table if not exists user_entity
 );
 
 alter table user_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists driver_entity
 (
@@ -238,7 +238,7 @@ create table if not exists driver_entity
 );
 
 alter table driver_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists driver_rating_entity
 (
@@ -253,7 +253,7 @@ create table if not exists driver_rating_entity
 );
 
 alter table driver_rating_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 
 create table if not exists driver_entity_ratings
@@ -269,7 +269,7 @@ create table if not exists driver_entity_ratings
 );
 
 alter table driver_entity_ratings
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists order_entity
 (
@@ -308,7 +308,7 @@ create table if not exists order_entity
 );
 
 alter table order_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists order_entity_items
 (
@@ -323,7 +323,7 @@ create table if not exists order_entity_items
 );
 
 alter table order_entity_items
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists restaurant_rating_entity
 (
@@ -339,7 +339,7 @@ create table if not exists restaurant_rating_entity
 );
 
 alter table restaurant_rating_entity
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists restaurant_entity_ratings
 (
@@ -354,7 +354,7 @@ create table if not exists restaurant_entity_ratings
 );
 
 alter table restaurant_entity_ratings
-   owner to postgres;
+   owner to rds_superuser;
 
 create table if not exists user_entity_order_list
 (
@@ -369,6 +369,6 @@ create table if not exists user_entity_order_list
 );
 
 alter table user_entity_order_list
-   owner to postgres;
+   owner to rds_superuser;
 
 SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
