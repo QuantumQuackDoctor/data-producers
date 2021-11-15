@@ -48,5 +48,5 @@ class Order:
             'driver_user_id': self.driver_user_id,
             'user_id': self.user_id,
             'confirmation_code': self.confirmation_code,
-            'payment_confirmed': self.payment_confirmed,
+            'payment_confirmed': self.payment_confirmed
         }
