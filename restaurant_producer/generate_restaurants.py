@@ -159,7 +159,7 @@ if __name__ == '__main__':
             addPromotionToDb()
         except Exception:
             log.warn('skipping %s',str(i))
-    for i in range(10000):
+    for i in range(70):
         try:
             addRatingToDb()
         except Exception:
