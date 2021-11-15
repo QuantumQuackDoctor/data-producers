@@ -1,6 +1,6 @@
 import unittest, logging
 from config import config
-from generate_driver import *
+from generate_drivers import *
 from dao import *
 
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s %(name)s %(levelname)s:%(message)s')

@@ -1,6 +1,6 @@
 import unittest
 from config import config
-from generate_order import *
+from generate_orders import *
 from dao import *
 
 class UserTest(unittest.TestCase):

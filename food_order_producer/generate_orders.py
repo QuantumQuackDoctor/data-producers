@@ -6,7 +6,7 @@ from dao import *
 from config import *
 
 fake = Faker()
-global_config = config(section='h2')
+global_config = config(section='postgresql-prod')
 
 # get user and driver ids
 def get_ids():
