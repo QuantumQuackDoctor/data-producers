@@ -54,7 +54,7 @@ def generate_order():
     restaurant_note = fake.paragraph()
     user_id = ids[1]
     confirmation_code = fake.bothify('########') if payment_confirmed else None
-    print('here')
+    print(order_complete)
 
     order = Order(id, active, address, delivery, driver_note, delivery_slot, driver_accept, driver_complete, order_complete,
                  placed, restaurant_accept, restaurant_complete, restaurant_start, delivery_price, food_price,
