@@ -56,7 +56,7 @@ def prepare_statement(crud, table, config=config(), **kwargs):
         log.info('Reading from %s table'%table)
         return (run_statement(config, query, (table)))
     elif crud == CrudOperation.UPDATE:
-        log.warn('Delete operation has not yet been implemented')
+        log.warning('Delete operation has not yet been implemented')
         pass
     elif crud == CrudOperation.DELETE:
         statement = ''' DELETE FROM {table} WHERE {} = {} RETURNING (select_list | *)'''

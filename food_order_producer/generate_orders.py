@@ -129,4 +129,4 @@ if __name__ == '__main__':
         try:
             add_order_to_db()
         except Exception:
-            log.warn('skipping %s', str(i))
+            log.warning('skipping %s', str(i))
