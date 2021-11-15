@@ -32,7 +32,7 @@ def generate_order():
     address = fake.street_address() + '\n' + geolocation[2] + ', ' + geolocation[3]
     placed = fake.date_time_between(start_date='-30d', end_date='now')
     food_price = round(random.uniform(5,120), 2)
-    payment_confirmed = random.choice([True, False])
+    payment_confirmed = True
     restaurant_accept = fake.date_time_between_dates(datetime_start=placed, datetime_end=placed+timedelta(minutes=40)) if payment_confirmed else None
     restaurant_start = fake.date_time_between_dates(datetime_start=restaurant_accept, datetime_end=restaurant_accept+timedelta(minutes=40)) if payment_confirmed else None
     restaurant_complete = fake.date_time_between_dates(datetime_start=restaurant_start, datetime_end=restaurant_start+timedelta(minutes=40)) if payment_confirmed else None
@@ -114,7 +114,7 @@ def add_order_to_db():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(100):
+    for i in range(300):
         try:
             add_order_to_db()
         except Exception:
