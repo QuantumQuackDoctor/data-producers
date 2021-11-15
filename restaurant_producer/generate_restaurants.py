@@ -149,12 +149,12 @@ def addRatingToRestaurantDb():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(500):
+    for i in range(300):
         try:
             addMenuToRestaurantDb()
         except Exception:
             log.warn('skipping %s',str(i))
-    for i in range(100):
+    for i in range(200):
         try:
             addPromotionToDb()
         except Exception:
@@ -164,12 +164,12 @@ if __name__ == '__main__':
             addRatingToDb()
         except Exception:
             log.warn('skipping %s',str(i))
-    for i in range(1000):
+    for i in range(100):
         try:
             addRestaurantToDb()
         except Exception:
             log.warn('skipping %s',str(i))
-    for i in range(10000):
+    for i in range(700):
         try:
             addMenuToRestaurantDb()
         except Exception:
