@@ -54,7 +54,6 @@ def generate_order():
     order = Order(id, active, address, delivery, driver_note, delivery_slot, driver_accept, driver_complete, order_complete,
                  placed, restaurant_accept, restaurant_complete, restaurant_start, delivery_price, food_price,
                  tip, refunded, restaurant_note, driver_user_id, user_id, confirmation_code, payment_confirmed)
-    print(order.toDict())
     log.info('order: %s', **order.toDict())
 
     return order
@@ -123,7 +122,7 @@ def add_order_to_db():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(5):
+    for i in range(1):
         try:
             add_order_to_db()
         except Exception:
