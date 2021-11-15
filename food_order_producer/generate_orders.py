@@ -93,27 +93,22 @@ def add_order_to_db():
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
-    # log.info('Adding %s to order_entity table', **order.toDict())
     prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
 
     # links order items with nmenu items through food_order_entity_order_items table
     food_order = gen_food_order(item_id)
-    log.info('Adding %s to food_order_entity table', **food_order)
     prepare_statement(CrudOperation.CREATE, 'food_order_entity', config=global_config, **food_order)
 
     # food_order_entity_order_items table links a menu id with order id
     order_item = gen_order_item(item_id)
-    log.info('Adding %s to food_order_entity_order_items table', **order_item)
     prepare_statement(CrudOperation.CREATE, 'food_order_entity_order_items', config=global_config, **order_item)
 
     # links order with menu item through food_order_entity and food_order_entity_order_items
     order_entity_items = lambda o, i: {'order_entity_id': o, 'items_id': i}
-    log.info('Adding to order_entity_items table', **order_entity_items(order.id, item_id))
     prepare_statement(CrudOperation.CREATE, 'order_entity_items', config=global_config, **order_entity_items(order.id, item_id))
 
     # generates db format for user_entity_order_list: links user id with order id
     gen_user_order = lambda user_id, order_id: {'user_entity_id': user_id,  'order_list_id': order_id}
-    log.info('Adding %s to user_entity_order_list table', **gen_user_order(order.user_id, order.id))
     prepare_statement(CrudOperation.CREATE, 'user_entity_order_list', config=global_config, **gen_user_order(order.user_id, order.id))
 
 if __name__ == '__main__':
