@@ -100,6 +100,7 @@ def add_order_to_db():
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
+    print('here')
     log.info('Adding %s to order_entity table', **order.toDict())
     prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
 
