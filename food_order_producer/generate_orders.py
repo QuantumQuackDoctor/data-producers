@@ -51,6 +51,10 @@ def generate_order():
     user_id = ids[1]
     confirmation_code = fake.bothify('########') if payment_confirmed else None
 
+    print(Order(id, active, address, delivery, driver_note, delivery_slot, driver_accept, driver_complete, order_complete,
+                 placed, restaurant_accept, restaurant_complete, restaurant_start, delivery_price, food_price,
+                 tip, refunded, restaurant_note, driver_user_id, user_id, confirmation_code, payment_confirmed).toDict())
+
     return Order(id, active, address, delivery, driver_note, delivery_slot, driver_accept, driver_complete, order_complete,
                  placed, restaurant_accept, restaurant_complete, restaurant_start, delivery_price, food_price,
                  tip, refunded, restaurant_note, driver_user_id, user_id, confirmation_code, payment_confirmed)
@@ -89,14 +93,14 @@ def gen_order_item(order_id):
 
 # add order to db
 def add_order_to_db():
-    table_order = generate_order()
+    order = generate_order()
     print('hereee4ee')
-    print(**table_order.toDict())
+    print(order.toDict())
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
-    log.info('Adding %s to order_entity table', **table_order.toDict())
-    prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **table_order.toDict())
+    log.info('Adding %s to order_entity table', **order.toDict())
+    prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
 
     # links order items with nmenu items through food_order_entity_order_items table
     food_order = gen_food_order(item_id)
@@ -125,4 +129,4 @@ if __name__ == '__main__':
         try:
             add_order_to_db()
         except Exception:
-            log.warning('skipping %s', str(i))
+            log.warn('skipping %s', str(i))

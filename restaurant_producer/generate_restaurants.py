@@ -153,34 +153,34 @@ if __name__ == '__main__':
         try:
             addRestaurantToDb()
         except Exception:
-            log.warning('skipping %s',str(i))
+            log.warn('skipping %s',str(i))
     for i in range(50):
         try:
             addMenuToDb()
         except Exception:
-            log.warning('skipping %s',str(i))
+            log.warn('skipping %s',str(i))
     for i in range(70):
         try:
             addRatingToDb()
         except Exception:
-            log.warning('skipping %s',str(i))
+            log.warn('skipping %s',str(i))
     for i in range(20):
         try:
             addPromotionToDb()
         except Exception:
-            log.warning('skipping %s',str(i))
+            log.warn('skipping %s',str(i))
     for i in range(60):
         try:
             addMenuToRestaurantDb()
         except Exception:
-            log.warning('skipping %s',str(i))
+            log.warn('skipping %s',str(i))
     for i in range(50):
         try:
             addPromotionToRestaurantDb()
         except Exception:
-            log.warning('skipping %s',str(i))
+            log.warn('skipping %s',str(i))
     for i in range(50):
         try:
             addRatingToRestaurantDb()
         except Exception:
-            log.warning('skipping %s',str(i))
+            log.warn('skipping %s',str(i))
