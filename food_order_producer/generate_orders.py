@@ -90,14 +90,10 @@ def gen_order_item(order_id):
 # add order to db
 def add_order_to_db():
     order = generate_order()
-    print('here')
-    print(type(order.toDict()))
-    print(type(**order.toDict()))
-    print('hereee4ee')
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
-    log.info('Adding %s to order_entity table', **order.toDict())
+    # log.info('Adding %s to order_entity table', **order.toDict())
     prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
 
     # links order items with nmenu items through food_order_entity_order_items table
