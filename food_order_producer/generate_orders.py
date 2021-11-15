@@ -94,8 +94,8 @@ def gen_order_item(order_id):
 # add order to db
 def add_order_to_db():
     order = generate_order()
+    print(**order.toDict())
     print('hereee4ee')
-    print(order.toDict())
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
