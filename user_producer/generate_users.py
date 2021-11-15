@@ -45,4 +45,4 @@ if __name__ == '__main__':
         try:
             add_user_to_db()
         except Exception:
-            log.warn('skipping %d',str(i))
+            log.warning('skipping %d',str(i))

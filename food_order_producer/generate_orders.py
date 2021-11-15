@@ -89,14 +89,14 @@ def gen_order_item(order_id):
 
 # add order to db
 def add_order_to_db():
-    order = generate_order()
+    table_order = generate_order()
     print('hereee4ee')
-    print(**order.toDict())
+    print(**table_order.toDict())
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
-    log.info('Adding %s to order_entity table', **order.toDict())
-    prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
+    log.info('Adding %s to order_entity table', **table_order.toDict())
+    prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **table_order.toDict())
 
     # links order items with nmenu items through food_order_entity_order_items table
     food_order = gen_food_order(item_id)
@@ -125,4 +125,4 @@ if __name__ == '__main__':
         try:
             add_order_to_db()
         except Exception:
-            log.warn('skipping %s', str(i))
+            log.warning('skipping %s', str(i))

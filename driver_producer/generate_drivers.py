@@ -74,9 +74,9 @@ if __name__ == '__main__':
         try:
             add_driver_to_db()
         except Exception:
-            log.warn('skipping %s', str(i))
+            log.warning('skipping %s', str(i))
     for i in range(30):
         try:
             add_driver_rating()
         except Exception:
-            log.warn('skipping %s', str(i))
+            log.warning('skipping %s', str(i))
