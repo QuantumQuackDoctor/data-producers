@@ -38,8 +38,6 @@ def generate_order():
     restaurant_complete = fake.date_time_between_dates(datetime_start=restaurant_start, datetime_end=restaurant_start+timedelta(minutes=40)) if payment_confirmed else None
     delivery = random.choice([True, False]) if payment_confirmed else None
     ids = get_ids()
-    print(ids)
-    print('here')
     driver_user_id = ids[0] if delivery else None
     delivery_price = round(random.uniform(3,10), 2) if delivery else None
     driver_accept = fake.date_time_between_dates(datetime_start=restaurant_accept, datetime_end=restaurant_complete) if delivery else None
@@ -48,6 +46,7 @@ def generate_order():
     driver_complete = fake.date_time_between_dates(datetime_start=restaurant_complete, datetime_end=restaurant_complete+timedelta(minutes=40)) if delivery else None
     tip = round(random.uniform(0,50), 2) if delivery else None
     order_complete = ''
+    print('here')
     try:
         order_complete = fake.date_time_between_dates(datetime_start=driver_complete, datetime_end=driver_complete+timedelta(minutes=50)) if delivery else None
     except Exception:
