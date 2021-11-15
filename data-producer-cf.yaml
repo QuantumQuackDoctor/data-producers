@@ -61,6 +61,11 @@ Resources:
         su ec2-user -c "git clone https://github.com/QuantumQuackDoctor/data-producers.git"
         cd data-producers/ && pip3 install -r requirements.txt
         python3 db/dbsetup.py
+        python3 user_producer/generate_users.py
+        python3 restaurant_producer/generate_restaurants.py
+        python3 driver_producer/generate_drivers.py
+        python3 food_order_producer/generate_orders.py
+        cd pgadmin && docker-compose up -d
 
   ManagedInstanceRole:
     Type: AWS::IAM::Role

@@ -68,4 +68,15 @@ def add_driver_rating():
     prepare_statement(CrudOperation.CREATE, 'driver_entity_ratings', config=global_config, **drivers_rating.toDict())
 
 if __name__ == '__main__':
-    print(generate_driver().toDict())
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
+    logger = logging.getLogger(__name__)
+    for i in range(1000):
+        try:
+            add_driver_to_db()
+        except Exception:
+            log.warn('skipping %s', str(i))
+    for i in range(1000):
+        try:
+            add_driver_rating()
+        except Exception:
+            log.warn('skipping %s', str(i))

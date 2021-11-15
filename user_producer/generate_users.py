@@ -39,4 +39,10 @@ def add_user_to_db():
     prepare_statement(CrudOperation.CREATE, 'user_entity', config=global_config, **user.toDict())
 
 if __name__ == '__main__':
-    add_user_to_db()
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
+    logger = logging.getLogger(__name__)
+    for i in range(10000):
+        try:
+            add_user_to_db()
+        except Exception:
+            log.warn('skipping %d',i)
