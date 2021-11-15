@@ -17,12 +17,8 @@ def get_ids():
     if user_data and driver_data:
         user_ids = [user[0] for user in user_data]
         driver_ids = [driver[1] for driver in driver_data]
-
         user_id = random.choice(user_ids)
         driver_id = random.choice(driver_ids)
-        print(user_id)
-        print('-------------------------------')
-        print(driver_id)
     else:
         log.error('There are no available users or drivers to choose from')
         raise Exception('There are no available users or drivers to choose from')
@@ -42,6 +38,8 @@ def generate_order():
     restaurant_complete = fake.date_time_between_dates(datetime_start=restaurant_start, datetime_end=restaurant_start+timedelta(minutes=40)) if payment_confirmed else None
     delivery = random.choice([True, False]) if payment_confirmed else None
     ids = get_ids()
+    print(ids)
+    print('here')
     driver_user_id = ids[0] if delivery else None
     delivery_price = round(random.uniform(3,10), 2) if delivery else None
     driver_accept = fake.date_time_between_dates(datetime_start=restaurant_accept, datetime_end=restaurant_complete) if delivery else None
@@ -58,10 +56,10 @@ def generate_order():
     restaurant_note = fake.paragraph()
     user_id = ids[1]
     confirmation_code = fake.bothify('########') if payment_confirmed else None
+
     order = Order(id, active, address, delivery, driver_note, delivery_slot, driver_accept, driver_complete, order_complete,
                  placed, restaurant_accept, restaurant_complete, restaurant_start, delivery_price, food_price,
                  tip, refunded, restaurant_note, driver_user_id, user_id, confirmation_code, payment_confirmed)
-    print(**order.toDict())
     log.info('order: %s', **order.toDict())
 
     return order
@@ -130,7 +128,7 @@ def add_order_to_db():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(5):
+    for i in range(50):
         try:
             add_order_to_db()
         except Exception:
