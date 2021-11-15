@@ -46,11 +46,11 @@ def generate_order():
     driver_complete = fake.date_time_between_dates(datetime_start=restaurant_complete, datetime_end=restaurant_complete+timedelta(minutes=40)) if delivery else None
     tip = round(random.uniform(0,50), 2) if delivery else None
     order_complete = ''
-    print('here')
     try:
         order_complete = fake.date_time_between_dates(datetime_start=driver_complete, datetime_end=driver_complete+timedelta(minutes=50)) if delivery else None
     except Exception:
         order_complete = driver_complete if delivery else None
+    print('here')
     refunded = random.choice([True, False]) if payment_confirmed else False
     restaurant_note = fake.paragraph()
     user_id = ids[1]
@@ -127,7 +127,7 @@ def add_order_to_db():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
-    for i in range(50):
+    for i in range(5):
         try:
             add_order_to_db()
         except Exception:
