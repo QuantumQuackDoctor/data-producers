@@ -90,7 +90,7 @@ def gen_order_item(order_id):
 # add order to db
 def add_order_to_db():
     order = generate_order()
-    item_id = fake.uuid4()
+    item_id = int(fake.numerify(text='###########'))
     
     # add order to db
     prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
