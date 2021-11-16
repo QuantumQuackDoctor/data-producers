@@ -28,3 +28,9 @@ The cloudformation template sets up a docker instance for pgadmin. To access thi
 username: admin@admin.com
 password: root
 ```
+To see your database secrets actual value, connect to the ec2 instance
+```
+cd data-producers
+python3 db/config.py
+```
+Use that to create a server on pgadmin
