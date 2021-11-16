@@ -93,7 +93,7 @@ def add_order_to_db():
     item_id = int(fake.numerify(text='###########'))
     
     # add order to db
-    print(order)
+    print(order.toDict())
     prepare_statement(CrudOperation.CREATE, 'order_entity', config=global_config, **order.toDict())
 
     # # links order items with nmenu items through food_order_entity_order_items table
