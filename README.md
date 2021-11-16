@@ -1,33 +1,30 @@
 # Setup
 
-## Install required packages
+## Running on local
+### Install required packages
 ```
 pip install -r requirements.txt
 ```
-
-## Setup AWS Credentials
+### Secrets Setup AWS Credentials for Database Secrets
 First install [`aws-cli`](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)  and then
 ```
 aws configure
 ```
 
-### create your own database.ini file with the format below
+### Change [section] in for each producer if needed (look at line 22 of config.py if you're getting errors and change as needed)
+
+## Running on AWS Cloud
+``` 
+aws cloudformation deploy --stack-name Data-${params.Environment} --region ${AWS_REGION} --template-file data-producer-cf.yaml  --parameter-overrides Environment=${params.Environment} KeyName=${KeyName} --no-fail-on-empty-changeset --capabilities CAPABILITY_NAMED_IAM
 ```
-[postgresql]
-host=10.0.2.15
-database=postgres
-user=postgres
-password=password
-port=5432
-[dbcontainer]
-image=postgres:latest
-ports=5432:5432
-name=postgres-qqd-database
-password=password
-[h2]
-dbname=test-db
-user=test
-password=password
-host=localhost
-port=5435
+
+## Running on Jenkins and AWS Cloud
+You can setup Jenkins to pull from this repo and the pipeline would do the rest
+
+## pgadmin
+The cloudformation template sets up a docker instance for pgadmin. To access this:
+```
+<ipv4>:5050
+username: admin@admin.com
+password: root
 ```
